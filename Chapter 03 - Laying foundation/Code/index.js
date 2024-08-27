@@ -21,13 +21,16 @@ const Compo3 = () => {
   return <h3>journey and saga of developer</h3>;
 };
 
+let x = "writing js inside jsx";
 // component composition
 const Compo4 = () => (
   <div className="container">
     <Compo3 />
     <h1>journey just started</h1>
-    <Compo3 />
+    {Compo3()}
     <h2>just started</h2>
+    <p>{x}</p>
+    {heading2}
   </div>
 );
 
