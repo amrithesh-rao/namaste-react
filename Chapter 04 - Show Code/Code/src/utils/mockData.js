@@ -1,8 +1,4 @@
-import ReactDOM from "react-dom/client";
-import React from "react";
-import logo from "./logo.jpg";
-
-const restData = [
+export const restData = [
   {
     info: {
       id: "405798",
@@ -761,66 +757,3 @@ const restData = [
     widgetId: "collectionV5RestaurantListWidget_SimRestoRelevance_food_seo",
   },
 ];
-
-const HeaderComponent = () => (
-  <div className="header container">
-    <img src={logo} alt="logo img" className="nav-logo" />
-    <NavigationComponent />
-  </div>
-);
-
-const NavigationComponent = () => (
-  <ul className="nav-bar container">
-    <li className="nav-item">Home</li>
-    <li className="nav-item">About</li>
-    <li className="nav-item">Cart-items</li>
-  </ul>
-);
-
-const BodyComonent = () => (
-  <div className="food-body">
-    {/* <RestorantSearchBarComponent /> */}
-    <div className="card-container">
-      {restData.map((restItem) => (
-        <RestorantCardComponent key={restItem.info.id} restData={restItem} />
-      ))}
-    </div>
-  </div>
-);
-
-const RestorantCardComponent = (props) => {
-  const { restData } = props;
-  return (
-    <div className="restorant-card">
-      <img
-        className="restorant-card-img"
-        src={
-          "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/" +
-          restData.info.cloudinaryImageId
-        }
-      />
-      <h3 className="restorant-card-item">{restData.info.name}</h3>
-      <h3 className="restorant-card-item">
-        {restData.info.cuisines.join(", ")}
-      </h3>
-
-      <h3 className="restorant-card-item">{restData.info.avgRating} rating</h3>
-
-      <h3 className="restorant-card-item">{restData.info.costForTwo}</h3>
-      <h3 className="restorant-card-item">
-        {restData.info.sla.deliveryTime} minutes
-      </h3>
-    </div>
-  );
-};
-
-const FoodApp = () => (
-  <div className="food-app">
-    <HeaderComponent />
-    <BodyComonent />
-  </div>
-);
-
-const root = ReactDOM.createRoot(document.getElementById("root"));
-
-root.render(<FoodApp />);
