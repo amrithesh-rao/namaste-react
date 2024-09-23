@@ -6,6 +6,7 @@ const Body = () => (
     Search
     {/* <RestorantSearchBarComponent /> */}
     <div className="card-container">
+      {/*this is a comment*/}
       {restData.map((restItem) => (
         <RestorantCard key={restItem.info.id} restData={restItem} />
       ))}
