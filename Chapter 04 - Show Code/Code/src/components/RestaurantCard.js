@@ -10,15 +10,15 @@ const RestorantCard = (props) => {
         className="restorant-card-img"
         src={RESTAURANT_MEDIA_LINK + cloudinaryImageId}
       />
-      <h3 className="restorant-card-item">{name}</h3>
-      <h3 className="restorant-card-item">
+      <h4 className="restorant-card-item">{name}</h4>
+      <h5 className="restorant-card-item">
         {restData.info.cuisines.join(", ")}
-      </h3>
+      </h5>
 
-      <h3 className="restorant-card-item">{avgRating} rating</h3>
+      <h5 className="restorant-card-item">{avgRating} rating</h5>
 
-      <h3 className="restorant-card-item">{costForTwo}</h3>
-      <h3 className="restorant-card-item">{sla.deliveryTime} minutes</h3>
+      <h5 className="restorant-card-item">{costForTwo}</h5>
+      <h5 className="restorant-card-item">{sla.deliveryTime} minutes</h5>
     </div>
   );
 };

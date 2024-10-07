@@ -9,16 +9,10 @@
 }
 
 .nav-logo {
-    width: 70px;
-}
-
-* {
-    padding: 0px;
-    margin: 0px;
+    width: 100px;
 }
 
 .header {
-    padding: 10px;
     border: 1px solid black;
 }
 
@@ -34,10 +28,20 @@
 
 .restorant-card {
     padding: 10px;
-    border: 1px solid black;
+    width: 200px;
 }
 
 .card-container {
     display: flex;
     flex-wrap: wrap;
+}
+
+.restorant-card:hover {
+    transform: scale(1.01);
+    cursor: pointer;
+}
+
+.filter-button {
+    padding: 5px;
+    margin: 10px;
 }
