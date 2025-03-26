@@ -1,10 +1,19 @@
 import { restData } from "../utils/mockData";
 import RestorantCard from "./RestaurantCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Body = () => {
   const [restDetail, setRestDetail] = useState(restData);
 
+  useEffect(()=>{
+      fetch(`https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&page_type=DESKTOP_WEB_LISTING`).then((response)=>{
+        response.json().then((res)=>{
+          console.log(res);
+        })
+      }).catch((err)=>{
+        console.log(err);
+      })
+  }, []);
   return (
     <div className="food-body">
       <button
