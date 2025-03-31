@@ -1,12 +1,15 @@
 import RestorantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
+import { Shimmer } from "./Shimmer";
 
 const Body = () => {
   const [restDetail, setRestDetail] = useState([]);
   const [filteredRestDetail, setFilteredRestDetail] = useState([]);
   const [searchValue, setSearchValue] = useState("");
 
+  console.log(`body is rendered - 1`);
   useEffect(() => {
+    console.log(`useEffect called`);
     fetch(
       `https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&page_type=DESKTOP_WEB_LISTING`
     )
@@ -29,10 +32,15 @@ const Body = () => {
         console.log(err);
       });
   }, []);
+  console.log(`body is rendered - 2`);
   return restDetail.length === 0 ? (
-    "loading"
+    <>
+      {console.log(`body html is rendered - 3`)}
+      <Shimmer />
+    </>
   ) : (
     <div className="food-body">
+      {console.log(`body html is rendered - 4`)}
       <input
         id="rest-search-button"
         placeholder="type restorant name here"
