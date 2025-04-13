@@ -2,38 +2,26 @@ import RestorantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import { Shimmer } from "./Shimmer";
 import { Link } from "react-router-dom";
+import useRestaurantDetails from "../utils/useRestaurantDetails";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body = () => {
   const [restDetail, setRestDetail] = useState([]);
   const [filteredRestDetail, setFilteredRestDetail] = useState([]);
   const [searchValue, setSearchValue] = useState("");
-
-  console.log(`body is rendered - 1`);
-  useEffect(() => {
-    console.log(`useEffect called`);
-    fetch(
-      `https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&page_type=DESKTOP_WEB_LISTING`
-    )
-      .then((response) => {
-        response.json().then((res) => {
-          console.log(res);
-          console.log(
-            res?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
-              ?.restaurants
-          );
-          setRestDetail(
-            res?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
-              ?.restaurants
-          );
-          setFilteredRestDetail(res?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
-            ?.restaurants);
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-  console.log(`body is rendered - 2`);
+  const getRestDetials = useRestaurantDetails();
+  console.log(`body html is rendered - 1`)
+  useEffect(()=>{
+    console.log(`body html is rendered - 2`)
+    setRestDetail(getRestDetials);
+    setFilteredRestDetail(
+      getRestDetials
+    );
+  }, [getRestDetials]);
+ 
+  if (!useOnlineStatus()) {
+    return <div>Not internet connection. please check internet connection</div>
+  }
   return restDetail.length === 0 ? (
     <>
       {console.log(`body html is rendered - 3`)}

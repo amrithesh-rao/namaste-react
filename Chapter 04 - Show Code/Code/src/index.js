@@ -1,12 +1,18 @@
 import ReactDOM from "react-dom/client";
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import Header from "./components/Header";
 import Body from "./components/Body";
 import About from "./components/About";
-import ContactUs from "./components/ContectUs";
 import RouteError from "./components/RouteError";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import RestaurantMenu from "./components/RestaurantMenu";
+
+// import Grocery from "./components/Grocery";
+// lazy loading: it wont be bundled along with all other in single file. seperate bundle file for grocery component
+// when first time Grocery called it will loaded(which will take some time to load) and put into cache. next time onwords its fetched from cache.
+// this import is not same as above import. its a different function
+const Grocery = lazy(() => import("./components/Grocery"));
+const ContactUs = lazy(() => import("./components/ContectUs"));
 
 const FoodApp = () => (
   <div className="food-app">
@@ -30,11 +36,16 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/contact",
-        element: <ContactUs />
+        element: <Suspense fallback={<h1>loading.....</h1>}><ContactUs /></Suspense>
       },
       {
         path: "/restaurant/:restId",
         element: <RestaurantMenu />
+      },
+      {
+        path: "/grocery",
+        element: <Suspense fallback={<h1>loading.....</h1>}><Grocery/></Suspense>
+        // fallback will take component or jsx. this will be displayed till grocery is loaded
       }
     ],
     errorElement: <RouteError />
