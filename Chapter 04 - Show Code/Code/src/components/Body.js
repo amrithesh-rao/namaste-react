@@ -28,17 +28,18 @@ const Body = () => {
       <Shimmer />
     </>
   ) : (
-    <div className="food-body">
+    <div>
       {console.log(`body html is rendered - 4`)}
+      <div className="flex justify-center m-4">
       <input
-        id="rest-search-button"
-        placeholder="type restorant name here"
+        className="border-2 border-black px-6 w-44"
+        placeholder="Search restaurant"
         value={searchValue}
         onChange={(e) => {
           setSearchValue(e.target.value);
         }}
       />
-      <button onClick={() => {
+      <button className="bg-orange-100 px-4 rounded-lg ml-2 mr-5" onClick={() => {
         if (searchValue.length === 0) {
           setFilteredRestDetail(restDetail);
           return;
@@ -56,12 +57,13 @@ const Body = () => {
           );
           setRestDetail(filterData);
         }}
-        className="filter-button"
+        className="bg-orange-100 px-4 rounded-lg mr-5"
       >
         Restaurant with avgRating greater than 4
       </button>
+      </div>
       {/* <RestorantSearchBarComponent /> */}
-      <div className="card-container">
+      <div className="flex flex-wrap">
         {/*this is a comment*/}
         {filteredRestDetail.map((restItem) => (
           <Link key={restItem.info.id} to={"/restaurant/"+restItem.info.id}><RestorantCard restData={restItem}/></Link>

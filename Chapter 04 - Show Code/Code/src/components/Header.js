@@ -8,16 +8,16 @@ const Header = () => {
   const isOnline = useOnlineStatus();
 
   return (
-    <div className="header container">
-      <img src={logo} alt="logo img" className="nav-logo" />
-      <ul className="nav-bar container">
-        <li className="nav-item">Online Status: {isOnline ? '✅' : '🔴'}</li>
-        <li className="nav-item"><Link to="/">Home</Link></li>
-        <li className="nav-item"><Link to="/about">About</Link></li>
-        <li className="nav-item"><Link to="/contact">Contact US</Link></li>
-        <li className="nav-item"><Link to="/grocery">Grocery</Link></li>
-        <li className="nav-item">Cart-items</li>
-        <li className="nav-item">
+    <div className="flex justify-between bg-orange-200">
+      <img src={logo} alt="logo img" className="w-24" />
+      <ul className="flex">
+        <li className="p-5">Online Status: {isOnline ? '✅' : '🔴'}</li>
+        <li className="p-5"><Link to="/">Home</Link></li> 
+        <li className="p-5"><Link to="/contact">Contact US</Link></li>
+        <li className="p-5"><Link to="/about">About</Link></li>
+        <li className="p-5"><Link to="/grocery">Grocery</Link></li>
+        <li className="p-5">Cart-items</li>
+        <li className="p-5">
           <button className="login-logout"
             onClick={()=> {
               console.log(isLogin);

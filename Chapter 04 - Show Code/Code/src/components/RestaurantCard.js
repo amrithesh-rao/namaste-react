@@ -5,12 +5,12 @@ const RestorantCard = (props) => {
   const { cloudinaryImageId, name, avgRating, costForTwo, sla } = restData.info;
 
   return (
-    <div className="restorant-card">
+    <div className="m-2 p-4 rounded-lg bg-orange-50 hover:bg-orange-900 w-[200px]">
       <img
-        className="restorant-card-img"
+        className="rounded-lg"
         src={RESTAURANT_MEDIA_LINK + cloudinaryImageId}
       />
-      <h4 className="restorant-card-item">{name}</h4>
+      <h4 className="font-bold py-2">{name}</h4>
       <h5 className="restorant-card-item">
         {restData.info.cuisines.join(", ")}
       </h5>
