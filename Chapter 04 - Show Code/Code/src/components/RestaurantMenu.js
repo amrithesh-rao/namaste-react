@@ -1,7 +1,9 @@
 import { useParams } from "react-router-dom";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
+import ItemMenu from "./ItemMenu";
 
 const RestaurantMenu = () => {
+    // const [isShow, setIsShow] = useState(false);
     const { restId } = useParams();
     console.log(useParams());
 
@@ -10,22 +12,26 @@ const RestaurantMenu = () => {
     if (restMenuInfo === null) {
         return <div>loading...</div>;
     }
-    const restName = restMenuInfo[0]?.card?.card?.text;
-    const restMenu = restMenuInfo[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card?.itemCards;
-    console.log(restMenu);
+
+    const { name, cuisines, costForTwoMessage } = restMenuInfo[2]?.card?.card?.info;
+    const categories = restMenuInfo[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.filter(
+        (card) => card.card.card['@type'] === "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory");
+    console.log(categories);
+
     return (
-        <>
-            <div>
-                {restName} Menu:
+        <div className="mx-auto w-6/12 text-center">
+            <div className="p-4">
+            <h2 className="font-bold text-lg">{name}</h2>
+            <h3 className="font-bold text-sm">{cuisines.join(", ")+" - "+costForTwoMessage}</h3>
             </div>
             <ul>
                 {
-                    restMenu?.map((card)=> (
-                        <li>{card?.card?.info?.name} - {card?.card?.info?.price/100 || card?.card?.info?.defaultPrice/100}rs</li>
+                    categories?.map((card)=> (
+                        <ItemMenu title={card.card.card.title} itemCards={card.card.card.itemCards} />
                     ))
                 }
             </ul>
-        </>
+        </div>
     );
 };
 
