@@ -1,9 +1,11 @@
 import { useParams } from "react-router-dom";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
 import ItemMenu from "./ItemMenu";
+import { useState } from "react";
+import RestaurantCategory from "./RestaurantCategory";
 
 const RestaurantMenu = () => {
-    // const [isShow, setIsShow] = useState(false);
+    const [showIndex, setShowIndex] = useState(0);
     const { restId } = useParams();
     console.log(useParams());
 
@@ -26,8 +28,8 @@ const RestaurantMenu = () => {
             </div>
             <ul>
                 {
-                    categories?.map((card)=> (
-                        <ItemMenu title={card.card.card.title} itemCards={card.card.card.itemCards} />
+                    categories?.map((card, index)=> (
+                        <RestaurantCategory title={card.card.card.title} itemCards={card.card.card.itemCards} setShow={() => setShowIndex(index)} isShow={index === showIndex}/>
                     ))
                 }
             </ul>
