@@ -1,11 +1,13 @@
 import RestorantCard from "./RestaurantCard";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Shimmer } from "./Shimmer";
 import { Link } from "react-router-dom";
 import useRestaurantDetails from "../utils/useRestaurantDetails";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import userContext from "../contexts/userContext";
 
 const Body = () => {
+  const { userName, setUserName } = useContext(userContext); 
   const [restDetail, setRestDetail] = useState([]);
   const [filteredRestDetail, setFilteredRestDetail] = useState([]);
   const [searchValue, setSearchValue] = useState("");
@@ -61,6 +63,7 @@ const Body = () => {
       >
         Restaurant with avgRating greater than 4
       </button>
+      <input className="border border-black" value={userName} onChange={(e)=> setUserName(e.target.value)}/>
       </div>
       {/* <RestorantSearchBarComponent /> */}
       <div className="flex flex-wrap">

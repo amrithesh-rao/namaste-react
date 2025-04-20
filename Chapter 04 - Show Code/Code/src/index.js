@@ -1,11 +1,12 @@
 import ReactDOM from "react-dom/client";
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useState } from "react";
 import Header from "./components/Header";
 import Body from "./components/Body";
 import About from "./components/About";
 import RouteError from "./components/RouteError";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import RestaurantMenu from "./components/RestaurantMenu";
+import userContext from "./contexts/userContext";
 
 // import Grocery from "./components/Grocery";
 // lazy loading: it wont be bundled along with all other in single file. seperate bundle file for grocery component
@@ -14,12 +15,19 @@ import RestaurantMenu from "./components/RestaurantMenu";
 const Grocery = lazy(() => import("./components/Grocery"));
 const ContactUs = lazy(() => import("./components/ContectUs"));
 
-const FoodApp = () => (
-  <div className="food-app">
-    <Header />
-    <Outlet />
-  </div>
-);
+const FoodApp = () => {
+  const [userName, setUserName] = useState("DefaultName");
+
+  return (
+  <userContext.Provider value={{ userName: userName, setUserName}}>
+    <div className="food-app">
+      <userContext.Provider value={{ userName: "Groot"}}>
+        <Header />
+      </userContext.Provider>
+      <Outlet />
+    </div>
+  </userContext.Provider>
+)};
 
 const appRouter = createBrowserRouter([
   {

@@ -29,7 +29,7 @@ const RestaurantMenu = () => {
             <ul>
                 {
                     categories?.map((card, index)=> (
-                        <RestaurantCategory title={card.card.card.title} itemCards={card.card.card.itemCards} setShow={() => setShowIndex(index)} isShow={index === showIndex}/>
+                        <RestaurantCategory title={card.card.card.title} itemCards={card.card.card.itemCards} setShow={(isShow) => isShow ? setShowIndex(null) : setShowIndex(index)} isShow={index === showIndex}/>
                     ))
                 }
             </ul>

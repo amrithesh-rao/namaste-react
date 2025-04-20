@@ -1,6 +1,7 @@
 import { Component } from "react";
 import Children1 from "./Children1";
 import Children2 from "./Children2";
+import userContext from "../contexts/userContext";
 
 class About extends Component {
   constructor(props) {
@@ -22,6 +23,7 @@ class About extends Component {
     return (
       <div>
         Its about my food app.
+        <userContext.Consumer>{({userName}) =>  <h1>Name :{userName}</h1>}</userContext.Consumer>
         <Children1 name="Amrithesh" location="Bangalore" />
         <Children2 name="Shanthi" location="Heaven" />
       </div>
