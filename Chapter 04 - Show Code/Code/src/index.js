@@ -7,6 +7,9 @@ import RouteError from "./components/RouteError";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import RestaurantMenu from "./components/RestaurantMenu";
 import userContext from "./contexts/userContext";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore";
+import { Cart } from "./components/Cart";
 
 // import Grocery from "./components/Grocery";
 // lazy loading: it wont be bundled along with all other in single file. seperate bundle file for grocery component
@@ -19,14 +22,16 @@ const FoodApp = () => {
   const [userName, setUserName] = useState("DefaultName");
 
   return (
-  <userContext.Provider value={{ userName: userName, setUserName}}>
-    <div className="food-app">
-      <userContext.Provider value={{ userName: "Groot"}}>
-        <Header />
-      </userContext.Provider>
-      <Outlet />
-    </div>
-  </userContext.Provider>
+  <Provider store={appStore}>
+    <userContext.Provider value={{ userName: userName, setUserName}}>
+      <div className="food-app">
+        <userContext.Provider value={{ userName: "Groot"}}>
+          <Header />
+        </userContext.Provider>
+        <Outlet />
+      </div>
+    </userContext.Provider>
+  </Provider>
 )};
 
 const appRouter = createBrowserRouter([
@@ -49,6 +54,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/restaurant/:restId",
         element: <RestaurantMenu />
+      },
+      {
+        path: "/cart",
+        element: <Cart />
       },
       {
         path: "/grocery",

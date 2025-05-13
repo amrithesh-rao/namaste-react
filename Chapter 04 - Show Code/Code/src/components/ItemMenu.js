@@ -1,6 +1,9 @@
+import { useDispatch } from "react-redux";
 import { RESTAURANT_MEDIA_LINK } from "../utils/constants";
+import { addItem } from "../utils/cartSlice";
 
 const ItemMenu = ({itemCards}) => {
+    const dispatch = useDispatch();
     console.log(itemCards);
     return (
         <div>
@@ -13,7 +16,7 @@ const ItemMenu = ({itemCards}) => {
                     <div className="ml-4 w-3/12">
                         <img src={RESTAURANT_MEDIA_LINK+item.card.info.imageId}/>
                         <div className="absolute -mt-10">
-                            <button className="bg-white p-3 rounded-lg shadow-lg mx-16">ADD</button>
+                            <button className="bg-white p-3 rounded-lg shadow-lg mx-16" onClick={() => {dispatch(addItem(item.card.info))}}>ADD</button>
                         </div>
                     </div>
                 </div>
